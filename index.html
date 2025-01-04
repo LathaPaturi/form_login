@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+</head>
+<body>
+  <h1>Login Page</h1>
+  <form onsubmit="redirectToSuccessPage(event)">
+    <label for="email">Email:</label>
+    <input 
+      type="email" 
+      id="email" 
+      name="email" 
+      value="" 
+      required 
+    /><br><br>
+
+    <label for="password">Password:</label>
+    <input 
+      type="text" 
+      id="password" 
+      name="password" 
+      value="" 
+      required 
+    /><br><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    // Extract URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email');
+    const name = urlParams.get('name'); // 'name' is being used as the password
+
+    // Populate the correct fields
+    if (email) {
+      document.getElementById('email').value = email;
+    }
+    if (name) {
+      document.getElementById('password').value = name;
+    }
+
+    // Redirect to the success page with the user's name
+    function redirectToSuccessPage(event) {
+      event.preventDefault(); // Prevent form submission
+      const email = document.getElementById('email').value;
+      const name = document.getElementById('password').value; // Password is stored in 'name'
+      const redirectUrl = `success.html?name=${encodeURIComponent(name)}`;
+      window.location.href = redirectUrl; // Redirect to the success page
+    }
+  </script>
+</body>
+</html>
